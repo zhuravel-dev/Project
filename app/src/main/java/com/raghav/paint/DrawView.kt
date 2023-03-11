@@ -23,9 +23,10 @@ class DrawView(c: Context, attributeSet: AttributeSet) : View(c, attributeSet) {
     private val paths = mutableListOf<Stroke>()
     private var currentColor = 0
     private var strokeWidth = 0
-    private lateinit var mBitmap: Bitmap
-    private lateinit var mCanvas: Canvas
+    private var mBitmap: Bitmap? = null
+    private var mCanvas: Canvas? = null
     private val mBitmapPaint = Paint(Paint.DITHER_FLAG)
+    private var mTool: Tool = Tool.Pencil
 
     init {
 
@@ -42,8 +43,9 @@ class DrawView(c: Context, attributeSet: AttributeSet) : View(c, attributeSet) {
     }
 
     fun init(height: Int, width: Int) {
-        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        mCanvas = Canvas(mBitmap)
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)?.also {
+            mCanvas = Canvas(it)
+        }
 
         //set an initial color of the brush
         currentColor = Color.GREEN
@@ -61,11 +63,24 @@ class DrawView(c: Context, attributeSet: AttributeSet) : View(c, attributeSet) {
         strokeWidth = width
     }
 
+    fun setTool(tool: Tool) {
+        mTool = tool
+    }
+
     fun undo() {
         //check whether the List is empty or not
         //if empty, the remove method will return an error
         if (paths.size != 0) {
             paths.removeAt(paths.size - 1)
+            invalidate()
+        }
+    }
+
+    fun undoAll() {
+        //check whether the List is empty or not
+        //if empty, the remove method will return an error
+        if (paths.size != 0) {
+            paths.clear()
             invalidate()
         }
     }
@@ -77,18 +92,22 @@ class DrawView(c: Context, attributeSet: AttributeSet) : View(c, attributeSet) {
 
     //this is the main method where the actual drawing takes place
     override fun onDraw(canvas: Canvas) {
+        if (mBitmap == null) return
         //save the current state of the canvas before,
         //to draw the background of the canvas
         canvas.save()
         //DEFAULT color of the canvas
         val backgroundColor = Color.WHITE
-        mCanvas!!.drawColor(backgroundColor)
+        mCanvas?.drawColor(backgroundColor)
 
         //now, we iterate over the list of paths and draw each path on the canvas
         for (fp in paths) {
             mPaint.color = fp.color
             mPaint.strokeWidth = fp.strokeWidth.toFloat()
-            mCanvas.drawPath(fp.path, mPaint)
+            when (mTool) {
+                Tool.Pencil -> mCanvas?.drawPath(fp.path, mPaint)
+                else -> mCanvas?.drawPath(fp.path, mPaint)
+            }
         }
         canvas.drawBitmap(mBitmap!!, 0f, 0f, mBitmapPaint)
         canvas.restore()
