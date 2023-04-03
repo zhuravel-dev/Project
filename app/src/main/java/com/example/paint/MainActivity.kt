@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         //the undo button will remove the most recent stroke from the canvas
         binding.btnUndo.setOnClickListener { binding.drawView.undo() }
 
-        //the undo button will remove the most recent stroke from the canvas
+        //the undo button long click remove everything from the canvas
         binding.btnUndo.setOnLongClickListener {
             binding.drawView.undoAll()
             false
