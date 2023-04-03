@@ -1,4 +1,4 @@
-package com.raghav.paint
+package com.example.paint
 
 import android.app.Activity
 import android.content.Intent
@@ -11,11 +11,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.RangeSlider
-import com.raghav.paint.databinding.ActivityMainBinding
+import com.example.paint.databinding.ActivityMainBinding
 import com.skydoves.colorpickerview.ColorPickerDialog
-import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import com.skydoves.colorpickerview.listeners.ColorListener
-import com.skydoves.colorpickerview.listeners.ColorPickerViewListener
 
 class MainActivity : AppCompatActivity() {
 

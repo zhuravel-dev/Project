@@ -1,4 +1,4 @@
-package com.raghav.paint
+package com.example.paint
 
 import android.content.Context
 import android.graphics.*
@@ -7,7 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import kotlin.math.abs
 
-
+// todo add more tools
 class DrawView(c: Context, attributeSet: AttributeSet) : View(c, attributeSet) {
 
     private val TOUCH_TOLERANCE = 4f

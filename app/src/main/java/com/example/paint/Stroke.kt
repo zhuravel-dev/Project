@@ -1,4 +1,4 @@
-package com.raghav.paint
+package com.example.paint
 
 import android.graphics.Path
 

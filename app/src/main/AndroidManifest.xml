@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raghav.paint">
+    package="com.example.paint">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Paint">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.paint.MainActivity"
             android:screenOrientation="sensorLandscape"
             android:exported="true">
             <intent-filter>

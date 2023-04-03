@@ -7,7 +7,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.raghav.paint"
+        applicationId "com.example.paint"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
